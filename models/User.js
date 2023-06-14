@@ -7,4 +7,4 @@ const User = new Schema({
   password: { type: String, required: [true, "Must specify a password"] },
 });
 
-module.exports = mongoose.model("highscore", Highscore);
+module.exports = mongoose.model("user", User);

@@ -1,15 +1,15 @@
 const User = require("../models/User");
 
-async function createUser(req, res) {
-  try {
-    const newUserData = req.body;
-    const newUser = await User.create(newUserData);
-    res.status(201).json(newEntry);
-  } catch (err) {
-    console.log(err);
-    res.status(500).send(err.message);
-  }
-}
+// async function createUser(req, res) {
+//   try {
+//     const newUserData = req.body;
+//     const newUser = await User.create(newUserData);
+//     res.status(201).json(newEntry);
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).send(err.message);
+//   }
+// }
 
 async function updateUser(req, res) {
   try {
@@ -25,4 +25,4 @@ async function updateUser(req, res) {
   }
 }
 
-module.exports = { createUser, updateUser };
+module.exports = { updateUser };
