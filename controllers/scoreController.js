@@ -33,9 +33,11 @@ async function getUserHighscore(req, res) {
     const user = await User.find({ _id: user_id });
     console.log("For id: ", user_id, "found user: ", user);
     if (!user) return res.status(404).send("No such user");
-    const userHighscores = await Highscore.find({ user: user_id }).sort({
-      score: -1,
-    });
+    const userHighscores = await Highscore.find({ user: user_id })
+      .populate("user")
+      .sort({
+        score: -1,
+      });
     res.status(200).json(userHighscores);
   } catch (err) {
     console.log(err);
