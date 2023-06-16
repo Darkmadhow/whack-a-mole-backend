@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const gameModes = require("../utils/gameModes");
 const { Schema, ObjectId } = mongoose;
 
 const Highscore = new Schema({
@@ -9,6 +10,11 @@ const Highscore = new Schema({
   },
   score: { type: Number, required: [true, "Must specify a score"] },
   date: { type: Date, default: Date.now },
+  gamemode: {
+    type: String,
+    enum: gameModes,
+    required: [true, "Must specify the gamemode"],
+  },
 });
 
 module.exports = mongoose.model("highscore", Highscore);

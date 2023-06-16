@@ -1,4 +1,5 @@
 const Joi = require("joi");
+const gameModes = require("../utils/gameModes");
 
 const sigupSchema = Joi.object({
   username: Joi.string().required(),
@@ -15,6 +16,9 @@ const highscoreSchema = Joi.object({
   user_id: Joi.string().hex().length(24).required(),
   score: Joi.number().required(),
   date: Joi.date(),
+  gamemode: Joi.string()
+    .required()
+    .valid(...gameModes),
 });
 
 module.exports = { sigupSchema, siginSchema, highscoreSchema };

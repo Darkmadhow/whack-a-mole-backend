@@ -4,8 +4,8 @@ const User = require("../models/User");
 async function uploadHighscore(req, res) {
   try {
     const { user_id } = req;
-    const { score } = req.body;
-    const newEntry = await Highscore.create({ user_id, score });
+    const { score, gamemode } = req.body;
+    const newEntry = await Highscore.create({ user_id, score, gamemode });
     res.status(201).json(newEntry);
   } catch (err) {
     console.log(err);
