@@ -5,7 +5,7 @@ async function uploadHighscore(req, res) {
   try {
     const { user_id } = req;
     const { score, gamemode } = req.body;
-    const newEntry = await Highscore.create({ user_id, score, gamemode });
+    const newEntry = await Highscore.create({ user: user_id, score, gamemode });
     res.status(201).json(newEntry);
   } catch (err) {
     console.log(err);
@@ -16,8 +16,10 @@ async function uploadHighscore(req, res) {
 async function getGlobalHighscore(req, res) {
   try {
     const allEntries = await Highscore.find()
+      .populate("user")
       .sort({ score: -1 })
-      .limit(process.env.HIGHSCORE_DISPLAY);
+      .limit(process.env.HIGHSCORE_DISPLAY)
+      .exec();
     res.status(200).json(allEntries);
   } catch (err) {
     console.log(err);

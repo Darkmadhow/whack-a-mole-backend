@@ -3,9 +3,9 @@ const gameModes = require("../utils/gameModes");
 const { Schema, ObjectId } = mongoose;
 
 const Highscore = new Schema({
-  user_id: {
+  user: {
     type: ObjectId,
-    ref: "User",
+    ref: "user",
     required: [true, "Must reference a user"],
   },
   score: { type: Number, required: [true, "Must specify a score"] },
