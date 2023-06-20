@@ -21,4 +21,9 @@ const highscoreSchema = Joi.object({
     .valid(...gameModes),
 });
 
-module.exports = { sigupSchema, siginSchema, highscoreSchema };
+const updateSchema = Joi.object({
+  password: Joi.string().alphanum().min(8).max(20),
+  email: Joi.string(),
+});
+
+module.exports = { sigupSchema, siginSchema, highscoreSchema, updateSchema };
