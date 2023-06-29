@@ -12,7 +12,7 @@ scoreRouter
   .route("/")
   .get(verifyToken, getGlobalHighscore)
   .post(verifyToken, uploadHighscore);
-scoreRouter.route("/:user_id").get(verifyToken, getUserHighscore);
-scoreRouter.route("/mode/:gamemode").get(verifyToken, getModeHighScore);
+  scoreRouter.route("/mode/:gamemode").get(verifyToken, getModeHighScore);
+scoreRouter.route("/personal/:gamemode").get(verifyToken, getUserHighscore);
 
 module.exports = scoreRouter;

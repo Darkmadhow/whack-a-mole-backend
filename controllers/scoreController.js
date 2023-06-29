@@ -30,10 +30,11 @@ async function getGlobalHighscore(req, res) {
 async function getUserHighscore(req, res) {
   try {
     const { user_id } = req;
+    const {gamemode} = req.params;
     const user = await User.find({ _id: user_id });
     console.log("For id: ", user_id, "found user: ", user);
     if (!user) return res.status(404).send("No such user");
-    const userHighscores = await Highscore.find({ user: user_id })
+    const userHighscores = await Highscore.find({ user: user_id, gamemode })
       .populate("user")
       .sort({
         score: -1,
