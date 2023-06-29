@@ -45,4 +45,19 @@ async function getUserHighscore(req, res) {
   }
 }
 
-module.exports = { uploadHighscore, getGlobalHighscore, getUserHighscore };
+async function getModeHighScore(req,res){
+  try {
+    const {gamemode} = req.params;
+    const allEntries = await Highscore.find({gamemode})
+      .populate("user")
+      .sort({ score: -1 })
+      .limit(process.env.HIGHSCORE_DISPLAY)
+      .exec();
+    res.status(200).json(allEntries);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err.message);
+  }
+}
+
+module.exports = { uploadHighscore, getGlobalHighscore, getUserHighscore, getModeHighScore };
