@@ -5,8 +5,12 @@ async function uploadHighscore(req, res) {
   try {
     const { user_id } = req;
     const { score, gamemode } = req.body;
+
+    // Find the count of highscores with a higher score
+    const rank = await Highscore.countDocuments({ score: { $gt: score } });
+
     const newEntry = await Highscore.create({ user: user_id, score, gamemode });
-    res.status(201).json(newEntry);
+    res.status(201).json({rank, newEntry});
   } catch (err) {
     console.log(err);
     res.status(500).send(err.message);
